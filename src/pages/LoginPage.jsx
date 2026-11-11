@@ -17,16 +17,29 @@ export const LoginPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (username === "agustin" && password === "agus123") {
-      localStorage.setItem("isLogged", true);
-      navigate("/home");
-    } else {
-      setError(true);
-      setTimeout(() => {
-        setError(false);
-      }, 2000);
-      return;
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const peticion = await fetch('http://localhost:3000/api/login', {
+      method: "POST",
+      body:JSON.stringify(form),
+      headers: {
+        "Content-Type":"application/json",
+      }
+    })
+    const respuesta = await peticion.json() 
+    if(peticion.ok){
+      alert("El usuario ha sido Logeado")
+    navigate("/home");
+
+    }else{
+      alert("El usuario no ha podido ser Logeado")
     }
+
+  }
+
+    
+
   };
 
   const handleChange = (event) => {

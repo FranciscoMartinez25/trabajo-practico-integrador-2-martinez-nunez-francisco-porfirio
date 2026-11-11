@@ -14,18 +14,34 @@ export const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    if (email === "marcos@email.com") {
-      setError(true);
-      setTimeout(() => {
-        setError(false);
-      }, 2000);
-      return;
-    }
+    const peticion = await fetch('http://localhost:3000/api/register', {
+      method: "POST",
+      body:JSON.stringify(form),
+      headers: {
+        "Content-Type":"application/json",
+      }
+    })
 
+    const respuesta = await peticion.json() 
+    if(peticion.ok){
+      alert("El usuario ha sido registrado")
     navigate("/login");
+
+    }else{
+      alert("El usuario no ha podido ser registrado")
+    }
+  
+    // if (email === "marcos@email.com") {
+    //   setError(true);
+    //   setTimeout(() => {
+    //     setError(false);
+    //   }, 2000);
+    //   return;
+    // }
+
   };
 
   const handleChange = (event) => {
