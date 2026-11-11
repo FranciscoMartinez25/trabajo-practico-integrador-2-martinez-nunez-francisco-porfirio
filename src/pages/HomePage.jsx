@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { Navbar } from "../components/Navbar";
 
-export const Fetching = () => {
+export const HomePage = () => {
   const [personaje, setPersonaje] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -23,6 +24,7 @@ export const Fetching = () => {
 
   return (
     <>
+    <Navbar/>
       <h1>Fetching de personaje</h1>
 
       {loading ? <h1>Cargando...</h1> : <p>{personaje}</p>}
